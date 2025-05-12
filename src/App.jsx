@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = 'https://cookieslaalpha.onrender.com';
 
 function App() {
   const [passwordInput, setPasswordInput] = useState('');
