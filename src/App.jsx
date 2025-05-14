@@ -34,11 +34,13 @@ const [uploadKeyInput, setUploadKeyInput] = useState('');
 
  const uploadFile = async () => {
   if (!file || !label) return alert('Choose a file and enter a label!');
-  const form = new FormData();
-  form.append('file', file);
-  form.append('label', label);
-  form.append('key', 'Julian13');
+
   try {
+    const form = new FormData();
+    form.append('file', file);
+    form.append('label', label);
+    form.append('key', localStorage.getItem('upload_key')); // ✅ Add uploader key
+
     await axios.post(`${BACKEND_URL}/secret-upload`, form);
     alert('Upload successful!');
     setLabel('');
@@ -47,13 +49,16 @@ const [uploadKeyInput, setUploadKeyInput] = useState('');
     alert('Upload failed: Unauthorized');
   }
 };
+
 const checkUploaderKey = () => {
   if (uploadKeyInput === 'Julian13') {
+    localStorage.setItem('upload_key', uploadKeyInput); // ✅ Store it
     setIsUploader(true);
   } else {
     alert('Wrong uploader password!');
   }
 };
+
 
 
   if (!isUnlocked) {
